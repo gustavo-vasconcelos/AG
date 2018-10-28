@@ -2,7 +2,7 @@ window.onload = function () {
     const canvas = document.getElementById("myCanvas")
     const context = canvas.getContext("2d")
 
-
+    
     let lado = parseInt(prompt("Indique qual o comprimento do lado de cada quadrado (pixels):"))
     let numeroQuadrados = parseInt(prompt("Indique qual o número de quadrados por linha:"))
     let cor1 = prompt("Indique qual primeira cor (hexadecimal):")

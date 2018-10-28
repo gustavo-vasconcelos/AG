@@ -24,7 +24,6 @@ window.onload = function () {
     let inOut = 0
 
     context.beginPath()
-    context.lineJoin = 'round'
     for (let i = 0; i <= 2 * Math.PI; i += 2 * Math.PI / (tips * 2)) {
         if (inOut % 2 === 0) {
             context.lineTo(x + radius / 2 * Math.cos(i), y + radius / 2 * Math.sin(i))
@@ -37,7 +36,7 @@ window.onload = function () {
     context.shadowColor = 'black'
     context.shadowBlur = 20;
     let grad = context.createRadialGradient(x, y, radius / 13, x, y, radius)
-    
+
     grad.addColorStop(0, color1);
     grad.addColorStop(1, color2);
     context.fillStyle = grad

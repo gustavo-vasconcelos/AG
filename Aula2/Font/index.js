@@ -5,7 +5,7 @@ window.onload = function () {
     canvas.height = 600
     canvas.width = 600
 
-    addGrid(25, "blue", "40px verdana")
+    addGrid(100, "blue", "40px verdana")
 }
 
 function addGrid(delta, color, fontParams) {
@@ -18,7 +18,7 @@ function addGrid(delta, color, fontParams) {
     let quantity = canvas.width / delta
     context.beginPath()
 
-    for (let i = 0; i < quantity * delta; i += delta) {
+    for (let i = delta; i < quantity * delta; i += delta) {
         context.strokeStyle = color
         context.moveTo(i, 0)
         context.lineTo(i, canvas.height)

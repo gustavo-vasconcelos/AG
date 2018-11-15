@@ -19,11 +19,9 @@ window.onload = function () {
         context.fillStyle = `rgb(${r},${g},${b},${a})`
         context.translate(canvas.width / 2, canvas.height / 2)
         context.rotate(angulo * Math.PI / 180)
-        context.fillRect(0,0, 200, 50)
-        
-        
+        context.fillRect(0, 0, 200, 50)
         context.restore()
         window.requestAnimationFrame(drawIt)
-        
+
     }
 }

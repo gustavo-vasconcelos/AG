@@ -1,34 +1,69 @@
-
+"use strict"
+let vLoss
 window.onload = function () {
-    let x = 0, timer, frames = 0
     const canvas = document.getElementById("myCanvas")
     const context = canvas.getContext("2d")
     canvas.height = 1000
     canvas.width = 1000
 
-    //timer = window.setInterval(drawIt, 16.67)
-    window.requestAnimationFrame(drawIt)
+    let timer, angle, v = 20, radius = 50
+    vLoss = 2
+    let a = { x: canvas.width / 2, y: canvas.height / 2 }
+    let b = { x: Math.random() * canvas.width, y: Math.random() * canvas.height }
+    //angle = Math.atan2(b.y - a.y, b.x - b.y);
+
+    let teta = Math.random() * 2 * Math.PI;
+    angle = teta
+    let vx = v * Math.cos(angle)
+    let vy = v * Math.sin(angle)
+
+    timer = window.setInterval(drawIt, 10)
+    //window.requestAnimationFrame(drawIt)
 
     function drawIt() {
-        context.fillStyle = "rgba(255,255,255,0.02)"
+        context.fillStyle = "rgba(255,255,255,0.001)"
         context.fillRect(0, 0, canvas.width, canvas.height)
 
         context.strokeStyle = "red"
-        context.strokeRect(x, 50, 50, 50)
-        x += 10
-        /*if (frames < 10) {
-            window.requestAnimationFrame(drawIt)
-            frames++
-            console.log(frames)
-        }*/
-
         
-        if(x + 50 <= canvas.width ) {
-            window.requestAnimationFrame(drawIt)
-            frames++
-            console.log(frames)
+
+        context.beginPath()
+        context.arc(a.x, a.y, radius, 0, Math.PI * 2)
+        context.stroke()
+
+
+        a.x += vx
+        a.y += vy
+
+        //up
+        if (a.y - radius <= 0) {
+            vy = -vy
         }
 
+        //down
+        if (a.y + radius >= canvas.height) {
+            vy = -vy
+        }
 
+        //right
+        if (a.x + radius >= canvas.width) {
+            vx = -vx
+        }
+
+        //left
+        if (a.x - radius <= 0) {
+            vx = -vx
+        }
+
+        //console.log("x: " + a.x + ". y: " + a.y)
+        console.log("vx: " + vx + ". vy:" + vy)
+    }
+}
+
+function reduce(value) {
+    if(value < 0) {
+        return value + vLoss
+    } else {
+        return value - vLoss
     }
 }

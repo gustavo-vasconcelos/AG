@@ -1,9 +1,8 @@
 let rainDrops = []
+let canvas
 
 window.onload = function () {
-
-
-    const canvas = document.getElementById("myCanvas")
+    canvas = document.getElementById("myCanvas")
     const context = canvas.getContext("2d")
     canvas.height = 1000
     canvas.width = 1000
@@ -16,7 +15,8 @@ window.onload = function () {
             this.length = length
             this.v0 = v
             this.v = v
-            this.a = 0.3
+            this.a = 0.15
+            this.angle = randomBetweenInterval(-Math.PI / 20, -Math.PI / 18)
             this.color = randomBlue()
         }
         update() {
@@ -25,18 +25,20 @@ window.onload = function () {
             this.clip()
         }
         draw() {
+            context.save()
+            context.rotate(this.angle)
             context.strokeStyle = this.color
             context.beginPath()
             context.moveTo(this.x, this.y)
             context.lineTo(this.x, this.y + this.length)
             context.stroke()
+            context.restore()
         }
         move() {
             this.v += this.a
             this.y += this.v
         }
         clip() {
-            //direita
             if (this.y >= canvas.height + this.length) {
                 this.y = -this.length
                 this.v = this.v0
@@ -47,19 +49,18 @@ window.onload = function () {
 
 
 
-    for (let i = 0; i < 1000; i++) {
-        let length = randomBetweenInterval(10, 15)
+    for (let i = 0; i < 2000; i++) {
+        let length = randomBetweenInterval(2, 5)
         rainDrops.push(new Raindrop(Math.random() * canvas.width, Math.random() * canvas.height, length, Math.random() * 5))
     }
 
-    timer = window.setInterval(drawIt, 16)
-
+    drawIt()
     function drawIt() {
-        context.fillStyle = "rgb(0,255,255)"
+        context.fillStyle = "rgba(0,255,255, 0.75)"
         context.fillRect(0, 0, canvas.width, canvas.height)
 
-
         rainDrops.forEach(rainDrop => rainDrop.update())
+        window.requestAnimationFrame(drawIt)
     }
 }
 

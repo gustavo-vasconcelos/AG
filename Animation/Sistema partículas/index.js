@@ -26,7 +26,7 @@ class Particle {
         if (this.active) {
             this.vy += this.a
             this.y += this.vy
-            if(this.vx > 0) {
+            if (this.vx > 0) {
                 this.vx += this.a
             } else {
                 this.vx -= this.a
@@ -36,6 +36,11 @@ class Particle {
         if (this.y >= canvas.height + this.radius && this.active) {
             this.active = false
         }
+        /*
+        if (this.y <= 0 - this.radius || this.x >= this.width + this.radius || this.x <= 0 - this.radius) {
+            this.active = false
+        }
+        */
     }
 }
 
@@ -57,7 +62,7 @@ window.onload = function () {
 }
 
 function drawIt() {
-    context.fillStyle = "rgba(0,0,0, 0.1)"
+    context.fillStyle = "rgba(0,0,0, 0.3)"
     context.fillRect(0, 0, canvas.width, canvas.height)
 
     for (let i = 0; i < particlesPerCicle; i++) {
@@ -89,12 +94,12 @@ window.addEventListener("resize", () => {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
     radius = getRadius(canvas.width, canvas.height)
-    
+
 })
 
 function getRadius(maxWidth, maxHeight) {
     let radiusValue
-    if(maxWidth > maxHeight) {
+    if (maxWidth > maxHeight) {
         radiusValue = maxWidth / 4.5
     } else {
         radiusValue = maxHeight / 4.5

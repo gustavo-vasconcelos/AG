@@ -172,7 +172,7 @@ function resolveCollision(particle, otherParticle) {
     } else {
         thetha1 = collisionAngle + Math.PI / 2
     }
-    */
+    
     thetha1 = collisionAngle - Math.PI
     thetha2 = collisionAngle
 
@@ -196,6 +196,14 @@ function resolveCollision(particle, otherParticle) {
     v2y = v2 * Math.sin(thetha2)
 
     // change final velocities
+    */
+    let v1x = (particle.v.x * (particle.radius - otherParticle.radius) + 2 * otherParticle.radius * otherParticle.v.x) / (particle.radius + otherParticle.radius);
+    let v2x = (otherParticle.v.x * (otherParticle.radius - particle.radius) + 2 * particle.radius * particle.v.x) / (particle.radius + otherParticle.radius);
+
+    let v1y = (particle.v.y * (particle.radius - otherParticle.radius) + 2 * otherParticle.radius * otherParticle.v.y) / (particle.radius + otherParticle.radius);
+    let v2y = (otherParticle.v.y * (otherParticle.radius - particle.radius) + 2 * particle.radius * particle.v.y) / (particle.radius + otherParticle.radius);
+
+
     particle.v.x = v1x
     particle.v.y = v1y
 

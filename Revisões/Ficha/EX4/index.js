@@ -1,80 +1,44 @@
-let canvas, context, angle = 50, closingMouth = true, openingMouth = false
+let canvas, context, angle = 0
 
 window.onload = () => {
     canvas = document.getElementById("myCanvas")
     context = canvas.getContext("2d")
-    canvas.height = 800
+    canvas.height = 1000
     canvas.width = 1000
+    context.translate(canvas.width / 2, canvas.height / 2)
 
     Animate()
 }
 
 function Animate() {
     // clear
-    context.fillStyle = "white"
-    context.fillRect(0, 0, canvas.width, canvas.height)
-    addGrid(100, "black", 0.2)
+    context.fillStyle = "rgba(255, 255, 255, 0.2)"
+    context.fillRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height)
 
-    context.fillStyle = "black"
-
-    let radius = 100
-    context.fillStyle = "yellow"
+    // protão
+    context.fillStyle = "teal"
     context.beginPath()
-    context.arc(canvas.width / 2, canvas.height / 2, radius, degreesToRadians(angle), degreesToRadians(360 - angle))
-    context.lineTo(canvas.width / 2, canvas.height / 2)
-    context.closePath()
-
+    context.arc(0, 0, 20, 0, 2 * Math.PI)
     context.fill()
-    context.moveTo(canvas.width / 2, canvas.height / 2)
-    context.stroke()
+    for (let i = 0; i < 2 * Math.PI; i += 2 * Math.PI / 6) {
+        context.save()
+        context.rotate(i)
+
+        context.beginPath()
+        context.ellipse(0, 0, 200, 100, 0, 0, 2 * Math.PI)
+        context.stroke()
 
 
-    // olho
-    context.beginPath()
-    context.arc(canvas.width / 2, canvas.height / 2 - 50, 10, 0, 2 * Math.PI)
-    context.fillStyle = "black"
-    context.fill()
-
-    if(closingMouth) {
-        angle -= 1
+        let cX = 200 * Math.cos(angle)
+        let cY = 100 * Math.sin(angle)
+        context.beginPath()
+        context.arc(cX, cY, 6, 0, 2 * Math.PI)
+        context.fill()
+        context.restore()
     }
-
-    if(openingMouth) {
-        angle += 1
-    }
-
-    if(angle <= 0) {
-        closingMouth = false
-        openingMouth = true
-    }
-
-    if(angle >= 50) {
-        openingMouth = false
-        closingMouth = true
-    }
-
-
+    angle += 2 * Math.PI / 400
     window.requestAnimationFrame(Animate)
-}
 
-function addGrid(delta, color, alpha) {
-    let quantity = canvas.width > canvas.height ? canvas.width / delta : canvas.height / delta
-    context.save()
-    context.globalAlpha = alpha
-    context.beginPath()
-    for (let i = 0; i < quantity * delta; i += delta) {
-        context.strokeStyle = color
-        context.moveTo(i, 0)
-        context.lineTo(i, canvas.height)
-
-        context.moveTo(0, i)
-        context.lineTo(canvas.width, i)
-
-        context.strokeText(i, canvas.width - delta, i, 50)
-        context.strokeText(i, i, canvas.height, 50)
-    }
-    context.stroke()
-    context.restore()
 }
 
 function randomBetweenInterval(min, max) {

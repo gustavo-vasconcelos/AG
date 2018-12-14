@@ -1,20 +1,19 @@
-let canvas, context, frame = 0
+let canvas, context, frame = 0, coin = 1, coinWidth = 100, coinHeight = 100
 
 window.onload = () => {
     canvas = document.getElementById("myCanvas")
     context = canvas.getContext("2d")
-    canvas.height = 810
-    canvas.width = 885
+    canvas.height = coinHeight
+    canvas.width = coinWidth
     window.setInterval(animate, 1000 / 15)
 }
 
 function animate() {
     context.fillStyle = "rgb(255,255,255)"
     context.fillRect(0, 0, canvas.width, canvas.height)
-    let coinWidth = 100
     let image = new Image()
     image.src = "coin-sprite-animation.png"
-    context.drawImage(image, coinWidth * frame, 0, coinWidth, 200, 0, 0, coinWidth, 100)
-    frame++
-    frame = frame % 60;
+    context.drawImage(image, coin * coinWidth, 0, coinWidth, coinHeight, 0, 0, coinWidth, coinHeight)
+    coin++
+    coin = coin % 10
 }

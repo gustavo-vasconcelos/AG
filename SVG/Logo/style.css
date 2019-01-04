@@ -1,0 +1,23 @@
+#background {
+    fill: none;
+    stroke: black;
+    stroke-dasharray: 5000;
+    stroke-dashoffset: 5000;
+    animation: 10s infinite forwards animate;
+}
+
+#title {
+    fill: none;
+    stroke: black;
+    stroke-dasharray: 5000;
+    stroke-dashoffset: 5000;
+    animation: 10s infinite forwards animate;
+}
+
+@keyframes animate {
+    from {
+        stroke-dasharray: 5000;
+    } to {
+        stroke-dashoffset: 0;
+    }
+}

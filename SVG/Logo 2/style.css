@@ -1,0 +1,61 @@
+.st0 {
+    fill: none;
+    stroke-dasharray: 5000;
+    stroke-dashoffset: 5000;
+    stroke: green;
+}
+
+.st1 {
+    stroke: green;
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    animation: move 5s alternate infinite;
+    animation-delay: 1s;
+    fill: none;
+    transform-origin: 50% 50%;
+}
+
+.st2 {
+    fill: none;
+    stroke: green;
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+    stroke-dasharray: 980;
+    stroke-dashoffset: 980;
+    animation: st2 1s alternate infinite;
+}
+
+@keyframes move {
+    0% {
+      stroke-dashoffset: 180;
+      opacity: 0;
+      fill-opacity: 0;
+    } 
+   50% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+      fill-opacity: 0;
+      fill: #9600FF;
+      transform:rotate(0deg);
+    }
+    75%{
+      fill-opacity: 1;
+      transform:rotate(0deg);
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+      fill: #9600FF;
+      transform: rotate(720deg)    
+    }
+  }
+  
+  
+
+@keyframes st2 {
+    from {
+        stroke-dashoffset: 980;
+    } to {
+        stroke-dashoffset: 0;
+    }
+}
